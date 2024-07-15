@@ -1,15 +1,15 @@
 <?php
-$servername = getenv('MYSQL_HOST');
-$username = getenv('MYSQL_USER');
-$password = getenv('MYSQL_PASSWORD');
-$dbname = getenv('MYSQL_DB');
+$servername = "db";
+$username = "testuser";
+$password = "testpassword";
+$dbname = "testdb";
 
-// Create connection
+// Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
+// Verificar conexión
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die("Conexión fallida: " . $conn->connect_error);
 }
-echo "Connected successfully";
+echo "Conexión exitosa a la base de datos";
 ?>
