@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS saludo(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    texto VARCHAR(255) NOT NULL
+);
+
+INSERT INTO saludo (texto) VALUES ('Hola Mundo');
