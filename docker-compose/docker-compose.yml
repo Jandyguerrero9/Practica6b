@@ -1,25 +1,27 @@
-
-version: "3.9"
+version: '3.8'
 
 services:
-  mysql:
-    image: mysql:5.7
-    restart: unless-stopped
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-    volumes:
-      - mysql-data:/var/lib/mysql
-
-  apache:
-    image: php:7.4-apache
-    restart: unless-stopped
+  web:
+    image: php:apache
     ports:
       - "80:80"
     volumes:
-      - ./src:/var/www/html
-    depends_on:
-      - mysql
+      - .:/var/www/html/
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DB=${MYSQL_DATABASE}
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
 
 volumes:
-  mysql-data:
+  db_data:

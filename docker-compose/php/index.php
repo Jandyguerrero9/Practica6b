@@ -1,20 +1,15 @@
 <?php
+$servername = getenv('MYSQL_HOST');
+$username = getenv('MYSQL_USER');
+$password = getenv('MYSQL_PASSWORD');
+$dbname = getenv('MYSQL_DB');
 
-$mysqli = new mysqli("mysql", "root", "my-secret-password", "mi-aplicacion-php-mysql");
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($mysqli->connect_error) {
-    die("Error de conexión: " . $mysqli->connect_error);
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = "SELECT * FROM usuarios";
-$result = $mysqli->query($sql);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "ID: " . $row["id"] . " - Nombre: " . $row["nombre"] . "<br>";
-    }
-} else {
-    echo "No hay resultados";
-}
-
-$mysqli->close();
+echo "Connected successfully";
+?>
